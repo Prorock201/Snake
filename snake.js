@@ -1,69 +1,85 @@
 window.onload = bindEventHandlers;
 var X = 600;
 var Y = 300;
-var R = 20;
-var Z = (Math.PI/180)*360;
-var SpeedX = -20;
+var Size = 20;
+var Speed = 20;
+var SpeedX = -Speed;
 var SpeedY = 0;
 var PreviousX = 600;
 var PreviousY = 300;
+var Snake = [
+	{x:600, y:300},
+	{x:620, y:300},
+	{x:640, y:300},
+	{x:660, y:300},
+	{x:680, y:300},
+];
 
 function bindEventHandlers() {
 	window.canvas = document.getElementById('grass');
 	window.context = canvas.getContext('2d');
 	canvas.width = 800;
 	canvas.height = 500;
+	context.fillStyle = 'red';
 	
-	setInterval(move, 100);
+	window.move = setInterval(drawSnake, 100);
 
 	$(document).keydown(function(event) {
 		switch(event.keyCode) {
 			case 37:
-				SpeedX = -20;
-				SpeedY = 0;
+				if (SpeedX != Speed) {
+					SpeedX = -Speed;
+					SpeedY = 0;
+				}
 				break;
 			case 38:
-				SpeedX = 0;
-				SpeedY = -20;
+				if (SpeedY != Speed) {
+					SpeedX = 0;
+					SpeedY = -Speed;
+				}
 				break;
 			case 39:
-				SpeedX = 20;
-				SpeedY = 0;
+				if (SpeedX != -Speed) {
+					SpeedX = Speed;
+					SpeedY = 0;
+				}
 				break;
 			case 40:
-				SpeedX = 0;
-				SpeedY = 20;
+				if (SpeedY != -Speed) {
+					SpeedX = 0;
+					SpeedY = Speed;
+				}
 		}
 	});
 }
 
-function move() {
-	context.clearRect(PreviousX-R, PreviousY-R, R*2, R*2);
-	context.clearRect(X-R, Y-R, R*2, R*2);
-	X += SpeedX;
-	Y += SpeedY;
-	drawBody(X, Y);
-	PreviousX = X;
-	PreviousY = Y;
-	if (X <= 0) {
-		X = 800 - X;
-		drawBody(X, Y);
-	} else if (X >= 800) {
-		X = 800 - X;
-		drawBody(X, Y);
-	}
-	if (Y <= 0) {
-		Y = 500 - Y;
-		drawBody(X, Y);
-	} else if (Y >= 500) {
-		Y = 500 - Y;
-		drawBody(X, Y);
-	}
+function Body() {
+	this.x = X;
+	this.y = Y;
 }
 
-function drawBody (X, Y) {
-	context.fillStyle = 'red';
-	context.beginPath();
-	context.arc(X, Y , R, 0, Z);
-	context.fill();
+function drawSnake() {
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	X += SpeedX;
+	Y += SpeedY;
+	Snake.pop();
+	Snake.unshift(new Body());
+	$.each(Snake, function drawBody(index, element) {
+		context.fillRect(element.x, element.y, Size, Size);
+		context.strokeRect(element.x, element.y, Size, Size);
+		if (element.x < 0) {
+			element.x = element.x + 800;
+			drawBody(index, element);
+		} else if (element.x > 800 - Size) {
+			element.x = element.x - 800;
+			drawBody(index, element);
+		}	
+		if (element.y < 0) {
+			element.y = element.y + 500;
+			drawBody(index, element);
+		} else if (element.y > 500 - Size) {
+			element.y = element.y - 500;
+			drawBody(index, element);
+		}
+	});
 }
