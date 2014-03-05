@@ -7,13 +7,9 @@ var SpeedX = -Speed;
 var SpeedY = 0;
 var PreviousX = 600;
 var PreviousY = 300;
-var Snake = [
-	{x:600, y:300},
-	{x:620, y:300},
-	{x:640, y:300},
-	{x:660, y:300},
-	{x:680, y:300},
-];
+var Snake = [{x:600, y:300}];
+var Basket = [];
+var FruitsVolume = 3;
 
 function bindEventHandlers() {
 	window.canvas = document.getElementById('grass');
@@ -22,7 +18,8 @@ function bindEventHandlers() {
 	canvas.height = 500;
 	context.fillStyle = 'red';
 	
-	window.move = setInterval(drawSnake, 100);
+	window.move = setInterval(drawSnake, 200);
+	setInterval(getSweeties, 100);
 
 	$(document).keydown(function(event) {
 		switch(event.keyCode) {
@@ -58,6 +55,11 @@ function Body() {
 	this.y = Y;
 }
 
+function Fruits() {
+	this.x = getRandom(0, (canvas.width-Size)/Size)*Size;
+	this.y = getRandom(0, (canvas.height-Size)/Size)*Size;
+}
+
 function drawSnake() {
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	X += SpeedX;
@@ -65,6 +67,7 @@ function drawSnake() {
 	Snake.pop();
 	Snake.unshift(new Body());
 	$.each(Snake, function drawBody(index, element) {
+		context.fillStyle = 'red';
 		context.fillRect(element.x, element.y, Size, Size);
 		context.strokeRect(element.x, element.y, Size, Size);
 		if (element.x < 0) {
@@ -81,5 +84,28 @@ function drawSnake() {
 			element.y = element.y - 500;
 			drawBody(index, element);
 		}
-	});
+		/*for (var i = 1; i < Snake.length; i++) {
+			if (Snake[0].x == Snake[i].x && Snake[0].y == Snake[i].y) {
+				location.reload();
+			}
+		}*/
+		$.each(Basket, function (index2, element2) {
+			context.fillStyle = 'green';
+			context.fillRect(element2.x, element2.y, Size, Size);
+			if (element.x == element2.x && element.y == element2.y) {
+				Basket[index2] = new Fruits();
+				Snake.push(new Body);
+			}
+		});
+	});	
+}
+
+function getRandom(min,max) {
+	return Math.floor(Math.random()*(max+1-min)+min);
+}
+
+function getSweeties() {
+	if (Basket.length < FruitsVolume) {
+		Basket.push(new Fruits());
+	}
 }
