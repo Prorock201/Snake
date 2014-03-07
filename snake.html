@@ -8,8 +8,113 @@
 	</head>
 	<body>
 		<div class="content">
+			<div class="new-game">
+				<div class="new-game__title">
+					<div class="new-game__title__name">NEW GAME</div>
+				</div>
+				<div class="new-game__text">
+					<div class="new-game__text__name">Press "start" to begin a new game</div>
+				</div>
+				<div class="new-game__button">
+					<div id="start">START</div>
+				</div>
+			</div>
+			<div class="level-up">
+				<div class="level-up__title">
+					<div class="level-up__title__name">LEVEL UP</div>
+				</div>
+				<div class="level-up__text">
+					<div class="level-up__text__fruits-bonus">
+						<div class="level-up__text__fruits-bonus title">Fruits Bonus:</div>
+						<div class="level-up__text__fruits-bonus value">0</div>
+					</div>
+					<div class="level-up__text__level-bonus">
+						<div class="level-up__text__level-bonus title">Level Bonus:</div>
+						<div class="level-up__text__level-bonus value">0</div>
+					</div>
+					<div class="level-up__text__score">
+						<div class="level-up__text__score title">Level Score:</div>
+						<div class="level-up__text__score value">0</div>
+					</div>
+					<div class="level-up__text__total-score">
+						<div class="level-up__text__total-score title">Total Score:</div>
+						<div class="level-up__text__total-score value">0</div>
+					</div>
+				</div>
+				<div class="level-up__button">
+					<div id="next">NEXT</div>
+				</div>
+			</div>
+			<div class="die">
+				<div class="die__title">
+					<div class="die__title__name">WARNING</div>
+				</div>
+				<div class="die__text">
+					<div class="die__text__name-score">Your Current Score: 0</div>
+					<div class="die__text__name">You have 3 lives left</div>
+				</div>
+				<div class="die__button">
+					<div id="continue">CONTINUE</div>
+				</div>
+			</div>
+			<div class="pause">
+				<div class="pause__title">
+					<div class="pause__title__name">PAUSE</div>
+				</div>
+				<div class="pause__text">
+					<div class="pause__text__name-score">Your Current Score: 0</div>
+					<div class="pause__text__name">Press "resume" when you will be ready</div>
+				</div>
+				<div class="pause__button">
+					<div id="resume">RESUME</div>
+				</div>
+			</div>
+			<div class="end-game">
+				<div class="end-game__title">
+					<div class="end-game__title__name">GAME OVER</div>
+				</div>
+				<div class="end-game__text">
+					<div class="end-game__text__name-score">Your Total Score: 0</div>
+					<div class="end-game__text__name">Press "new game" to play again</div>
+				</div>
+				<div class="end-game__button">
+					<div id="end-game">NEW GAME</div>
+				</div>
+			</div>
+			<div class="win-game">
+				<div class="win-game__title">
+					<div class="win-game__title__name">YOU WIN</div>
+				</div>
+				<div class="win-game__text">
+					<div class="win__text__fruits-bonus">
+						<div class="win__text__fruits-bonus title">Fruits Bonus:</div>
+						<div class="win__text__fruits-bonus value">0</div>
+					</div>
+					<div class="win__text__level-bonus">
+						<div class="win__text__level-bonus title">Level Bonus:</div>
+						<div class="win__text__level-bonus value">0</div>
+					</div>
+					<div class="win__text__score">
+						<div class="win__text__score title">Level Score:</div>
+						<div class="win__text__score value">0</div>
+					</div>
+					<div class="win__text__total-score">
+						<div class="win__text__total-score title">Total Score:</div>
+						<div class="win__text__stotal-core value">0</div>
+					</div>
+				</div>
+				<div class="win-game__button">
+					<div id="win-game">NEW GAME</div>
+				</div>
+			</div>
 			<canvas id="grass"></canvas>
-			<div class="content__info"></div>
+			<div class="content__info">
+				<div class="content__info__lives">Lives: 3</div>
+				<div class="content__info__level">Level: 1</div>
+				<div class="content__info__fruits">Fruits: 0/0</div>
+				<div id="score">Score: 0</div>
+				<div id="pause">Pause</div>
+			</div>
 		</div>
 	</body>
 </html>

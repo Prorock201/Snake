@@ -1,3 +1,11 @@
+body {
+ margin: 0;
+ background: url(back.jpg);
+ user-select: none;
+ -webkit-user-select: none;
+ cursor: default;
+}
+
 .content {
  width: 1100px;
  height: 500px;
@@ -7,12 +15,147 @@
 }
 
 #grass {
- border: 1px solid red;
+ background: url(grass.jpg);
+ border-radius: 5px 5px 5px 5px;
+ box-shadow: 15px 0px 40px #007F0E, 0px 15px 40px #007F0E, -15px 0px 40px #006009, 0px -15px 40px #006009;
 }
 
 .content__info {
  width: 200px;
  height: 500px;
- border: 1px solid red;
+ background: url(menu.jpg);
+ border: 2px solid #C1A979;
+ border-radius: 10px 10px 10px 10px;
+ box-shadow: 1px 1px 10px #9E3F00, -1px -1px 10px #C1A979;
  float: right;
+}
+
+.content__info div {
+ width: 160px;
+ height: 40px;
+ margin: 20px;
+ padding-top: 10px;	
+ font-size: 17pt;
+ font-family: Rockwell, Verdana, monospace;
+ text-align: center;
+ color: yellow;
+ text-shadow: 2px 2px 2px black;
+ border: 1px solid #BA8C4E;
+ border-radius: 10px 10px 10px 10px;
+ box-shadow: 2px 2px 5px #000000;
+ background: url(button-sand.jpg);
+}
+
+#score {
+ border: 1px solid #52C2C3;
+ background: url(score.jpg);
+}
+
+#pause {
+ margin-top: 140px;
+ border: 1px solid #B34864;
+ background: url(pause.jpg);	
+ cursor: pointer;
+}
+
+.new-game, .level-up, .die, .pause, .end-game, .win-game {
+ width: 400px;
+ height: 250px;
+ position: fixed;
+ top: 225px;
+ left: 300px;
+ font-family: Rockwell, Verdana, monospace;
+ text-align: center;
+ background-color: #FFFFFF;
+ border: 2px solid black;
+ border-radius: 10px 10px 10px 10px;
+ z-index: 20;
+ display: none;
+}
+
+.new-game {
+ display: block;	
+}
+
+.new-game__title, .level-up__title, .die__title, .pause__title, .end-game__title, .win-game__title {
+ height: 60px;
+ border-radius: 7px 7px 0px 0px;
+}
+
+.new-game__title, .end-game__title {
+ background-color: #FFD800;		
+}
+
+.level-up__title {
+ background-color: #0026FF;	
+}
+
+.new-game__title__name, .level-up__title__name, .die__title__name, .pause__title__name, .end-game__title__name, .win-game__title__name {
+ position: relative;
+ top: 5px;
+ font-size: 30pt;
+ letter-spacing: 15px;
+ color: #FFFFFF;
+}
+
+.new-game__text, .level-up__text, .die__text, .pause__text, .end-game__text, .win-game__text {
+ height: 130px;
+ padding-top: 10px;
+}
+
+.level-up__text__total-score, .win__text__total-score {
+ color: #FF0000;
+}
+
+.title, .value {
+ width: 200px;
+ height: 30px;
+ font-size: 16pt;
+ float: left;
+}
+
+#start, #next, #continue, #resume, #end-game, #win-game {
+ width: 200px;
+ height: 30px;
+ position: relative;
+ left: 100px;
+ font-size: 18pt;
+ letter-spacing: 3px;
+ color: #FFFFFF;
+ background-color: #0026FF;
+ border: 2px solid black; 
+ border-radius: 10px 10px 10px 10px;
+ box-shadow: 2px 2px 5px #000000;
+ cursor: pointer;
+}
+
+#start:hover, #next:hover, #continue:hover, #resume:hover, #end-game:hover, #win-game:hover {
+ background-color: #FF0000;
+ transform: scale(1,5, 1,5);
+ -webkit-transform: scale(1.1, 1.1);
+}
+
+.die__title {
+ background-color: #FF0000;
+}
+
+.new-game__text__name, .die__text__name, .pause__text__name, .end-game__text__name {
+ padding-top: 30px;
+ font-size: 18pt;
+ letter-spacing: 3px;
+}
+
+.pause__title {
+ background-color: #FF006E;		
+}
+
+.win-game__title {
+ background-color: #4CFF00;		
+}
+
+.die__text__name-score, .pause__text__name-score, .end-game__text__name-score {
+ padding: 0;
+ font-size: 18pt;
+ letter-spacing: 3px;
+ color: #FF0000;	
 }
