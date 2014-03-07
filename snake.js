@@ -82,9 +82,14 @@ function drawSnake() {
 		if (Snake[0].x == Snake[i].x && Snake[0].y == Snake[i].y) {
 			clearInterval(play);
 			--Lives;
-			$('.die__text__name-score').text('Your Current Score: ' + Score);
-			$('.die__text__name').text('You have ' + Lives +' lives left');
-			$('.die').css('display', 'block');
+			if (Lives < 0) {
+				$('.end-game__text__name-score').text('Your Total Score: ' + Score);
+				$('.end-game').css('display', 'block');
+			} else {
+				$('.die__text__name-score').text('Your Current Score: ' + Score);
+				$('.die__text__name').text('You have ' + Lives +' lives left');
+				$('.die').css('display', 'block');
+			}
 		}
 	}
 	$.each(Snake, function drawBody(index, element) {
@@ -161,10 +166,7 @@ function upDateResult() {
 	$('.content__info__level').text('Level: '+ Level);
 	$('.content__info__fruits').text('Fruits: '+ Fruits + '/' + NeedFruits);
 	$('#score').text('Score: ' + Score);
-	if (Lives < 0) {
-		clearInterval(play);
-		$('.end-game').css('display', 'block');
-	}
+	
 	if (Fruits == 60) {
 		clearInterval(play);
 		$('.win__text__fruits-bonus .value').text(CurrentScore);
