@@ -1,5 +1,6 @@
 body {
  margin: 0;
+ font-family: Comic Sans MS, monospace;
  background: url(back.jpg);
  user-select: none;
  -webkit-user-select: none;
@@ -8,25 +9,26 @@ body {
 
 .content {
  width: 1100px;
- height: 500px;
+ height: 600px;
  position: relative;
- top: 100px;
+ top: 50px;
  left: 100px;
 }
 
 #grass {
  background: url(grass.jpg);
+ border: 2px solid #003D00;
  border-radius: 5px 5px 5px 5px;
- box-shadow: 15px 0px 40px #007F0E, 0px 15px 40px #007F0E, -15px 0px 40px #006009, 0px -15px 40px #006009;
+ box-shadow: 5px 5px 10px #000000;
 }
 
 .content__info {
  width: 200px;
- height: 500px;
+ height: 600px;
  background: url(menu.jpg);
- border: 2px solid #C1A979;
+ border: 2px solid #666629;
  border-radius: 10px 10px 10px 10px;
- box-shadow: 1px 1px 10px #9E3F00, -1px -1px 10px #C1A979;
+ box-shadow: 5px 5px 10px #000000;
  float: right;
 }
 
@@ -34,15 +36,14 @@ body {
  width: 160px;
  height: 40px;
  margin: 20px;
- padding-top: 10px;	
- font-size: 17pt;
- font-family: Rockwell, Verdana, monospace;
+ padding-top: 8px;	
+ font-size: 16pt;
  text-align: center;
  color: yellow;
- text-shadow: 2px 2px 2px black;
- border: 1px solid #BA8C4E;
+ text-shadow: 3px 3px 3px #000000;
+ border: 1px solid #4C4C1F;
  border-radius: 10px 10px 10px 10px;
- box-shadow: 2px 2px 5px #000000;
+ box-shadow: 5px 5px 10px #000000;
  background: url(button-sand.jpg);
 }
 
@@ -52,24 +53,55 @@ body {
 }
 
 #pause {
- margin-top: 140px;
+ margin-top: 250px;
  border: 1px solid #B34864;
  background: url(pause.jpg);	
  cursor: pointer;
 }
 
+.content__info__lives:hover::after, .content__info__level:hover::after, .content__info__fruits:hover::after, #score:hover::after {
+ position: absolute;
+ padding: 10px 10px;
+ color: #000000;
+ background: rgba(255,255,230,0.8);
+ font-size: 11px;
+ border: 1px solid #333;
+ z-index: 1;	
+}
+
+.content__info__lives:hover::after {
+ content: 'When your lives become equal to zero, game will over';
+ left: 82%; top: 12%;
+}
+
+.content__info__level:hover::after {
+ content: 'Your current level of the game';
+ left: 83%; top: 23.5%;
+}
+
+.content__info__fruits:hover::after {
+ content: 'Flowing quantity of collected fruit / necessary quantity of fruit to level up';
+ left: 82%; top: 35%;
+}
+
+#score:hover::after {
+ content: 'Your current score of the game';
+ left: 83%; top: 46.5%;
+}
+
 .new-game, .level-up, .die, .pause, .end-game, .win-game {
  width: 400px;
- height: 250px;
+ height: 300px;
  position: fixed;
- top: 225px;
+ top: 200px;
  left: 300px;
- font-family: Rockwell, Verdana, monospace;
  text-align: center;
+ text-shadow: 3px 3px 3px #000000;
  background-color: #FFFFFF;
  border: 2px solid black;
  border-radius: 10px 10px 10px 10px;
- z-index: 20;
+ box-shadow: 5px 5px 10px #000000;
+ z-index: 10;
  display: none;
 }
 
@@ -79,28 +111,21 @@ body {
 
 .new-game__title, .level-up__title, .die__title, .pause__title, .end-game__title, .win-game__title {
  height: 60px;
+ background-color: #000066;	
  border-radius: 7px 7px 0px 0px;
-}
-
-.new-game__title, .end-game__title {
- background-color: #FFD800;		
-}
-
-.level-up__title {
- background-color: #0026FF;	
 }
 
 .new-game__title__name, .level-up__title__name, .die__title__name, .pause__title__name, .end-game__title__name, .win-game__title__name {
  position: relative;
- top: 5px;
  font-size: 30pt;
  letter-spacing: 15px;
  color: #FFFFFF;
 }
 
 .new-game__text, .level-up__text, .die__text, .pause__text, .end-game__text, .win-game__text {
- height: 130px;
- padding-top: 10px;
+ height: 160px;
+ text-shadow: 1px 1px 1px #000000;
+ padding-top: 30px;
 }
 
 .level-up__text__total-score, .win__text__total-score {
@@ -114,43 +139,31 @@ body {
  float: left;
 }
 
-#start, #next, #continue, #resume, #end-game, #win-game {
- width: 200px;
+#start, #settings, #next, #continue, #resume, #end-game, #win-game, #apply, #cancel, .quit, .records {
+ width: 165px;
  height: 30px;
- position: relative;
- left: 100px;
- font-size: 18pt;
+ margin-left: 20px;
+ font-size: 16pt;
  letter-spacing: 3px;
  color: #FFFFFF;
- background-color: #0026FF;
- border: 2px solid black; 
+ background-color: #000066;
+ border: 2px solid black;
  border-radius: 10px 10px 10px 10px;
- box-shadow: 2px 2px 5px #000000;
+ box-shadow: 5px 5px 10px #000000;
  cursor: pointer;
+ float: left;
 }
 
-#start:hover, #next:hover, #continue:hover, #resume:hover, #end-game:hover, #win-game:hover {
+#start:hover, #settings:hover, #next:hover, #continue:hover, #resume:hover, #end-game:hover, #win-game:hover, #apply:hover, #cancel:hover, .quit:hover, .records:hover {
  background-color: #FF0000;
  transform: scale(1,5, 1,5);
  -webkit-transform: scale(1.1, 1.1);
 }
 
-.die__title {
- background-color: #FF0000;
-}
-
 .new-game__text__name, .die__text__name, .pause__text__name, .end-game__text__name {
- padding-top: 30px;
+ padding: 30px;
  font-size: 18pt;
  letter-spacing: 3px;
-}
-
-.pause__title {
- background-color: #FF006E;		
-}
-
-.win-game__title {
- background-color: #4CFF00;		
 }
 
 .die__text__name-score, .pause__text__name-score, .end-game__text__name-score {
@@ -158,4 +171,51 @@ body {
  font-size: 18pt;
  letter-spacing: 3px;
  color: #FF0000;	
+}
+
+.setting-menu {
+ width: 700px;
+ height: 500px;
+ position: fixed;
+ top: 100px;
+ left: 150px;
+ text-align: center;
+ text-shadow: 3px 3px 3px #000000;
+ background: #FFFFFF;
+ border: 2px solid black;
+ border-radius: 10px 10px 10px 10px;
+ box-shadow: 5px 5px 10px #000000;
+ z-index: 20;
+ display: none;
+}
+
+.setting-menu__content {
+ float: left;
+}
+
+.setting-menu__content > div {
+ height: 50px;
+ margin-top: 20px;
+ margin-left: 25px;
+ padding-top: 8px;	
+ font-size: 18pt;
+ text-align: center;
+ text-shadow: 1px 1px 1px #000000;
+}
+
+.menu-items div {
+ width: 200px;
+ float: left;
+}
+
+#example {
+ margin-top: 20px;
+ background: url(grass.jpg);
+ border: 2px solid #003D00;
+ border-radius: 5px 5px 5px 5px;
+ box-shadow: 5px 5px 10px #000000;
+}
+
+select {
+ width: 100px;
 }

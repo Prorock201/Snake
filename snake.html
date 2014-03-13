@@ -17,6 +17,7 @@
 				</div>
 				<div class="new-game__button">
 					<div id="start">START</div>
+					<div id="settings">SETTINGS</div>
 				</div>
 			</div>
 			<div class="level-up">
@@ -43,6 +44,7 @@
 				</div>
 				<div class="level-up__button">
 					<div id="next">NEXT</div>
+					<div class="quit">QUIT GAME</div>
 				</div>
 			</div>
 			<div class="die">
@@ -55,6 +57,7 @@
 				</div>
 				<div class="die__button">
 					<div id="continue">CONTINUE</div>
+					<div class="quit">QUIT GAME</div>
 				</div>
 			</div>
 			<div class="pause">
@@ -67,6 +70,7 @@
 				</div>
 				<div class="pause__button">
 					<div id="resume">RESUME</div>
+					<div class="quit">QUIT GAME</div>
 				</div>
 			</div>
 			<div class="end-game">
@@ -79,6 +83,7 @@
 				</div>
 				<div class="end-game__button">
 					<div id="end-game">NEW GAME</div>
+					<div class="records">RECORDS</div>
 				</div>
 			</div>
 			<div class="win-game">
@@ -105,7 +110,88 @@
 				</div>
 				<div class="win-game__button">
 					<div id="win-game">NEW GAME</div>
+					<div class="records">RECORDS</div>
 				</div>
+			</div>
+			<div class="setting-menu">
+				<div class="setting-menu__content">
+					<div class="setting-menu__content__snake-size menu-items">
+						<div class="setting-menu__content__snake-size__title">Snake's size</div>
+						<div class="setting-menu__content__snake-size__value">
+							<select id="snake-size">
+  								<option>40</option>
+  								<option>25</option>
+  								<option>20</option>
+  								<option>10</option>
+							</select>
+						</div>
+					</div>
+					<div class="setting-menu__content__snake-color menu-items">
+						<div class="setting-menu__content__snake-color__title">Snake's color</div>
+						<div class="setting-menu__content__snake-color__value">
+							<select id="snake-color">
+  								<option>Mamba</option>
+  								<option>Viper</option>
+  								<option>Scarlet</option>
+  								<option>Coral</option>
+  								<option>Racer</option>
+  								<option>Python</option>
+  								<option>Copperhead</option>
+  								<option>Tiger</option>
+  								<option>Puff adder</option>
+  								<option>Indigo</option>
+  								<option>King snake</option>
+  								<option>Boomslang</option>
+							</select>
+						</div>
+					</div>
+					<div class="setting-menu__content__fruits menu-items">
+						<div class="setting-menu__content__fruits__title">Fruits</div>
+						<div class="setting-menu__content__fruits__value">
+							<select id="fruits">
+  								<option>Apple</option>
+  								<option>Apricot</option>
+  								<option>Banana</option>
+  								<option>Cherry</option>
+  								<option>Kiwi</option>
+  								<option>Lemon</option>
+  								<option>Mango</option>
+  								<option>Orange</option>
+  								<option>Peach</option>
+  								<option>Pear</option>
+  								<option>Strawberry</option>
+  								<option>Tomato</option>
+							</select>
+						</div>
+					</div>
+					<div class="setting-menu__content__board-color menu-items">
+						<div class="setting-menu__content__board-color__title">Board's theme</div>
+						<div class="setting-menu__content__board-color__value">
+							<select id="board-color">
+								<option>Grass</option>
+								<option>Earth</option>
+  								<option>Sand</option>
+  								<option>Sky</option>
+  								<option>White-rock</option>
+							</select>
+						</div>
+					</div>
+					<div class="setting-menu__content__difficulty menu-items">
+						<div class="setting-menu__content__difficulty__title">Difficulty's level</div>
+						<div class="setting-menu__content__difficulty__value">
+							<select id="difficulty">
+  								<option>Norm</option>
+  								<option>Hard</option>
+  								<option>Impossible</option>
+							</select>
+						</div>
+					</div>
+					<div class="new-game__button">
+						<div id="apply">OK</div>
+						<div id="cancel">CANCEL</div>
+					</div>
+				</div>
+				<canvas id="example"></canvas>
 			</div>
 			<canvas id="grass"></canvas>
 			<div class="content__info">
