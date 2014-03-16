@@ -17,14 +17,29 @@ var Fruits = 0;
 var CurrentScore = 0;
 var PreviouslyScore = 0;
 var Score = 0;
-var Speed = 200;
+var Speed = 250;
 var Bonus = 300;
 var Pic = new Image();
 var FriutName = 'apple';
 var SkinA = 'green';
 var SkinB = 'white';
-var Theme = 'grass';
+var Theme = 'sand';
 Pic.src = 'images/' + FriutName + '.png';
+var CheatCode = [];
+var CheatMode = false;
+var UserName = 'noName';
+var HighScore = [
+	{name: 'vasya', points: 10000},
+	{name: 'petro', points: 8000},
+	{name: 'mikhalich', points: 5000},
+	{name: 'ludochka', points: 2000},
+	{name: 'slot', points: 500},
+	{name: 'zahar', points: 3000},
+	{name: 'babka', points: 15000},
+	{name: 'superman', points: 20000},
+	{name: 'supergavno', points: 300},
+	{name: 'gavno', points: 100},
+];
 
 function bindEventHandlers() {
 	window.example = document.getElementById('example');
@@ -38,6 +53,33 @@ function bindEventHandlers() {
 	canvas.width = 800;
 	canvas.height = 600;
 
+	$('#jump').click(function() {
+		CheatMode = true;
+		Level = $('#level-go option:selected').val();
+		$('.cheat-game').css('display', 'none');
+		getNecessarylevel(Level);
+	});
+
+	$('#cancelCheat').click(function() {
+		$('.cheat-game').css('display', 'none');
+		continueGame();
+	});
+
+	$('#confirm').click(function() {
+		if ($('.profile__text__value input').val().length < 3) {
+			$('#name-error').css('display', 'block');
+		} else {
+			UserName = $('.profile__text__value input').val();
+			$('.profile').css('display', 'none');
+			$('.new-game').css('display', 'block');
+		}
+	});
+
+	$('#incognito').click(function() {
+		$('.profile').css('display', 'none');
+		$('.new-game').css('display', 'block');
+	});
+
 	$('#start').on('click', startGame);
 	$('#settings').on('click', getSettingsMenu);
 	$('#next').on('click', getNewLevel);
@@ -47,11 +89,23 @@ function bindEventHandlers() {
 	$('#win-game').on('click', startNewGame);
 	$('#pause').on('click', getPause);
 	$('.quit').on('click', startNewGame);
-	$('.records').on('click', getRecordsTable);
+
+	$('.records').click(function() {
+		$('.high-score').css('display', 'block');
+	});
+
 	$('#apply').click(function() {
 		$('.setting-menu').css('display', 'none');
 	});
 	$('#cancel').on('click', startNewGame);
+
+	$('#hs-ok').click(function() {
+		$('.high-score').css('display', 'none');
+	});
+
+	$('#clear').click(function() {
+		console.log('FILL IT!!!');
+	});
 
 	$('#snake-size').change(function() {
 		Size = parseInt($('#snake-size option:selected').val());
@@ -76,7 +130,7 @@ function bindEventHandlers() {
 				break;
 			case 'Coral':
 				SkinA = 'red';
-				SkinB = 'black';
+				SkinB = 'yellow';
 				break;
 			case 'Racer':
 				SkinA = 'black';
@@ -151,6 +205,38 @@ function bindEventHandlers() {
 					MoveX = 0;
 					MoveY = Move;
 				}
+				break;
+		}
+
+		switch(event.keyCode) {
+			case 67:
+				if (CheatCode.length == 0) {
+					CheatCode.push('c');
+				}
+				break;
+			case 72:
+				if (CheatCode.length == 1) {
+					CheatCode.push('h');
+				}
+				break;
+			case 69:
+				if (CheatCode.length == 2) {
+					CheatCode.push('e');
+				}
+				break;
+			case 65:
+				if (CheatCode.length == 3) {
+					CheatCode.push('a');
+				}
+				break;
+			case 84:
+				if (CheatCode.length == 4) {
+					clearInterval(play);
+					$('.cheat-game').css('display', 'block');
+				}
+				break;
+			default:
+				CheatCode = [];
 		}
 	});
 }
@@ -205,6 +291,7 @@ function drawSnake() {
 			if (Lives < 0) {
 				$('.end-game__text__name-score').text('Your Total Score: ' + Score);
 				$('.end-game').css('display', 'block');
+				recordResult();
 			} else {
 				$('.die__text__name-score').text('Your Current Score: ' + Score);
 				$('.die__text__name').text('You have ' + Lives +' lives left');
@@ -281,7 +368,7 @@ function getPause() {
 function getResume() {
 	$('.pause').css('display', 'none');
 	$('.die').css('display', 'none');
-	play = setInterval(drawSnake, Speed);
+	continueGame();
 }
 
 function startNewGame() {
@@ -290,10 +377,6 @@ function startNewGame() {
 
 function getSettingsMenu() {
 	$('.setting-menu').css('display', 'block');
-}
-
-function getRecordsTable() {
-	console.log('FILL IT!!!');
 }
 
 function upDateResult() {
@@ -307,7 +390,7 @@ function upDateResult() {
 	$('.content__info__fruits').text('Fruits: '+ Fruits + '/' + NeedFruits);
 	$('#score').text('Score: ' + Score);
 	
-	if (Fruits == 60) {
+	if (Fruits == 50) {
 		clearInterval(play);
 		$('.win__text__fruits-bonus .value').text(CurrentScore);
 		$('.win__text__level-bonus .value').text(levelBonus);
@@ -315,6 +398,7 @@ function upDateResult() {
 		$('.win__text__total-score .value').text(Score);
 		$('#score').text('Score: ' + Score);
 		$('.win-game').css('display', 'block');
+		recordResult();
 	} else if (Fruits == NeedFruits) {
 		clearInterval(play);
 		levelBonus = Level*Bonus;
@@ -336,24 +420,54 @@ function startGame() {
 	$('.setting-menu').css('display', 'none');
 	$('.new-game').css('display', 'none');
 	$('#grass').css('background', 'url('+ Theme + '.jpg)');
-	window.play = setInterval(drawSnake, Speed);
-	setInterval(getSweeties, 1000);
+	continueGame();
 }
 
 function getNewLevel() {
 	clearInterval(play);
-	Basket = [];
-	MaxFruits += 1;
 	Level += 1;
+	MaxFruits = Level;
 	Fruits = 0;
 	CurrentScore = 0;
 	Speed -= 25;
-	if (NeedFruits == 45) {
-		NeedFruits = 60;
-	} else {
-		NeedFruits += 5;
-	}
+	NeedFruits += 5;
 	$('.level-up').css('display', 'none');
-	window.play = setInterval(drawSnake, Speed);
+	continueGame();
+}
+
+function getNecessarylevel(Level) {
+	Basket = [];
+	MaxFruits = Level;
+	Fruits = 0;
+	NeedFruits = Level*5;
+	CurrentScore = 0;
+	Speed = 275 - Level*25;
+	continueGame();
+}
+
+function continueGame() {
+	play = setInterval(drawSnake, Speed);
 	setInterval(getSweeties, 1000);
+}
+
+function recordResult() {
+	$('.high-score').css('display', 'block');
+	/*localStorage.setItem('records', {'name': UserName, 'points': Score});
+	HighScore.push(JSON.stringify(localStorage.getItem('records')));*/
+	HighScore.push({'name': UserName, 'points': Score});
+	HighScore.sort(function(a, b) {
+ 		return b.points - a.points
+	});
+	$('.high-score__content__row__result').each(function(index, element) {
+		$(element).find('div').each(function(index2, element2) {
+			switch (index2) {
+				case 0:
+					$(element2).text(HighScore[index].name);
+					break;
+				case 1:
+					$(element2).text(HighScore[index].points);
+					break;
+			}
+		});
+	});
 }

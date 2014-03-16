@@ -16,7 +16,7 @@ body {
 }
 
 #grass {
- background: url(grass.jpg);
+ background: url(sand.jpg);
  border: 2px solid #003D00;
  border-radius: 5px 5px 5px 5px;
  box-shadow: 5px 5px 10px #000000;
@@ -71,25 +71,30 @@ body {
 
 .content__info__lives:hover::after {
  content: 'When your lives become equal to zero, game will over';
- left: 82%; top: 12%;
+ top: 12%;
+ left: 82%; 
+ 
 }
 
 .content__info__level:hover::after {
  content: 'Your current level of the game';
- left: 83%; top: 23.5%;
+ top: 23.5%;
+ left: 83%; 
 }
 
 .content__info__fruits:hover::after {
  content: 'Flowing quantity of collected fruit / necessary quantity of fruit to level up';
- left: 82%; top: 35%;
+ top: 35%;
+ left: 82%; 
 }
 
 #score:hover::after {
  content: 'Your current score of the game';
- left: 83%; top: 46.5%;
+ top: 46.5%;
+ left: 83%; 
 }
 
-.new-game, .level-up, .die, .pause, .end-game, .win-game {
+.high-score, .cheat-game, .profile, .new-game, .level-up, .die, .pause, .end-game, .win-game {
  width: 400px;
  height: 300px;
  position: fixed;
@@ -105,24 +110,24 @@ body {
  display: none;
 }
 
-.new-game {
+.profile {
  display: block;	
 }
 
-.new-game__title, .level-up__title, .die__title, .pause__title, .end-game__title, .win-game__title {
+.high-score__title, .cheat-game__title, .profile__title, .new-game__title, .level-up__title, .die__title, .pause__title, .end-game__title, .win-game__title {
  height: 60px;
  background-color: #000066;	
  border-radius: 7px 7px 0px 0px;
 }
 
-.new-game__title__name, .level-up__title__name, .die__title__name, .pause__title__name, .end-game__title__name, .win-game__title__name {
+.high-score__title__name, .cheat-game__title__name, .profile__title__name, .new-game__title__name, .level-up__title__name, .die__title__name, .pause__title__name, .end-game__title__name, .win-game__title__name {
  position: relative;
  font-size: 30pt;
  letter-spacing: 15px;
  color: #FFFFFF;
 }
 
-.new-game__text, .level-up__text, .die__text, .pause__text, .end-game__text, .win-game__text {
+.cheat-game__text, .profile__text, .new-game__text, .level-up__text, .die__text, .pause__text, .end-game__text, .win-game__text {
  height: 160px;
  text-shadow: 1px 1px 1px #000000;
  padding-top: 30px;
@@ -139,7 +144,7 @@ body {
  float: left;
 }
 
-#start, #settings, #next, #continue, #resume, #end-game, #win-game, #apply, #cancel, .quit, .records {
+#jump, #cancelCheat, #confirm, #incognito, #start, #settings, #next, #continue, #resume, #end-game, #win-game, #apply, #cancel, .quit, .records, #hs-ok, #clear {
  width: 165px;
  height: 30px;
  margin-left: 20px;
@@ -154,7 +159,7 @@ body {
  float: left;
 }
 
-#start:hover, #settings:hover, #next:hover, #continue:hover, #resume:hover, #end-game:hover, #win-game:hover, #apply:hover, #cancel:hover, .quit:hover, .records:hover {
+#jump:hover, #cancelCheat:hover, #confirm:hover, #incognito:hover, #start:hover, #settings:hover, #next:hover, #continue:hover, #resume:hover, #end-game:hover, #win-game:hover, #apply:hover, #cancel:hover, .quit:hover, .records:hover, #hs-ok:hover, #clear:hover {
  background-color: #FF0000;
  transform: scale(1,5, 1,5);
  -webkit-transform: scale(1.1, 1.1);
@@ -166,11 +171,24 @@ body {
  letter-spacing: 3px;
 }
 
-.die__text__name-score, .pause__text__name-score, .end-game__text__name-score {
+.cheat-game__text__title, .profile__text__title, .die__text__name-score, .pause__text__name-score, .end-game__text__name-score {
  padding: 0;
  font-size: 18pt;
  letter-spacing: 3px;
+}
+
+.die__text__name-score, .pause__text__name-score, .end-game__text__name-score {
  color: #FF0000;	
+}
+
+#level-go, .profile__text__value {
+ margin: 40px;
+}
+
+#name-error {
+ margin-top: -40px;
+ color: red;
+ display: none;
 }
 
 .setting-menu {
@@ -210,7 +228,7 @@ body {
 
 #example {
  margin-top: 20px;
- background: url(grass.jpg);
+ background: url(sand.jpg);
  border: 2px solid #003D00;
  border-radius: 5px 5px 5px 5px;
  box-shadow: 5px 5px 10px #000000;
@@ -218,4 +236,32 @@ body {
 
 select {
  width: 100px;
+}
+
+.high-score {
+ width: 700px;
+ height: 500px;
+ top: 100px;
+ left: 150px;
+ z-index: 20;	
+}
+
+.high-score__content__row {
+ height: 30px;
+ margin-top: 5px;
+}
+
+.high-score__content__row__list {
+ width: 200px;
+ float: left;
+}
+
+.high-score__content__row__result div {
+ width: 250px;
+ float: left;	
+}
+
+#hs-ok, #clear {
+ margin: 30px;
+ margin-left: 110px;
 }

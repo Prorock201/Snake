@@ -8,6 +8,48 @@
 	</head>
 	<body>
 		<div class="content">
+			<div class="cheat-game">
+				<div class="cheat-game__title">
+					<div class="cheat-game__title__name">CHEATING</div>
+				</div>
+				<div class="cheat-game__text">
+					<div class="cheat-game__text__title">Choose level you want to go</div>
+					<div class="cheat-game__text__value">
+						<select id="level-go">
+  							<option>1</option>
+  							<option>2</option>
+  							<option>3</option>
+  							<option>4</option>
+  							<option>5</option>
+  							<option>6</option>
+  							<option>7</option>
+  							<option>8</option>
+  							<option>9</option>
+  							<option>10</option>
+						</select>
+					</div>
+				</div>
+				<div class="cheat-game__button">
+					<div id="jump">GO TO</div>
+					<div id="cancelCheat">CANCEL</div>
+				</div>
+			</div>
+			<div class="profile">
+				<div class="profile__title">
+					<div class="profile__title__name">PROFILE</div>
+				</div>
+				<div class="profile__text">
+					<div class="profile__text__title">Enter your name:</div>
+					<div class="profile__text__value">
+						<input type="text"></input>
+					</div>
+					<div id="name-error">*at least 3 symbols are necessary</div>
+				</div>
+				<div class="profile__button">
+					<div id="confirm">OK</div>
+					<div id="incognito">INCOGNITO</div>
+				</div>
+			</div>
 			<div class="new-game">
 				<div class="new-game__title">
 					<div class="new-game__title__name">NEW GAME</div>
@@ -83,7 +125,7 @@
 				</div>
 				<div class="end-game__button">
 					<div id="end-game">NEW GAME</div>
-					<div class="records">RECORDS</div>
+					<div class="records">HIGH SCORE</div>
 				</div>
 			</div>
 			<div class="win-game">
@@ -110,7 +152,7 @@
 				</div>
 				<div class="win-game__button">
 					<div id="win-game">NEW GAME</div>
-					<div class="records">RECORDS</div>
+					<div class="records">HIGH SCORE</div>
 				</div>
 			</div>
 			<div class="setting-menu">
@@ -168,9 +210,9 @@
 						<div class="setting-menu__content__board-color__title">Board's theme</div>
 						<div class="setting-menu__content__board-color__value">
 							<select id="board-color">
+								<option>Sand</option>
 								<option>Grass</option>
 								<option>Earth</option>
-  								<option>Sand</option>
   								<option>Sky</option>
   								<option>White-rock</option>
 							</select>
@@ -193,12 +235,94 @@
 				</div>
 				<canvas id="example"></canvas>
 			</div>
+			<div class="high-score">
+				<div class="high-score__title">
+					<div class="high-score__title__name">HIGH SCORE</div>
+				</div>
+				<div class="high-score__content">
+					<div class="high-score__content__row">
+						<div class="high-score__content__row__list">1</div>
+						<div class="high-score__content__row__result">
+							<div class="high-score__content__row__result__name">.....</div>
+							<div class="high-score__content__row__result__points">0</div>
+						</div>
+					</div>
+					<div class="high-score__content__row">
+						<div class="high-score__content__row__list">2</div>
+						<div class="high-score__content__row__result">
+							<div class="high-score__content__row__result__name">.....</div>
+							<div class="high-score__content__row__result__points">0</div>
+						</div>
+					</div>
+					<div class="high-score__content__row">
+						<div class="high-score__content__row__list">3</div>
+						<div class="high-score__content__row__result">
+							<div class="high-score__content__row__result__name">.....</div>
+							<div class="high-score__content__row__result__points">0</div>
+						</div>
+					</div>
+					<div class="high-score__content__row">
+						<div class="high-score__content__row__list">4</div>
+						<div class="high-score__content__row__result">
+							<div class="high-score__content__row__result__name">.....</div>
+							<div class="high-score__content__row__result__points">0</div>
+						</div>
+					</div>
+					<div class="high-score__content__row">
+						<div class="high-score__content__row__list">5</div>
+						<div class="high-score__content__row__result">
+							<div class="high-score__content__row__result__name">.....</div>
+							<div class="high-score__content__row__result__points">0</div>
+						</div>
+					</div>
+					<div class="high-score__content__row">
+						<div class="high-score__content__row__list">6</div>
+						<div class="high-score__content__row__result">
+							<div class="high-score__content__row__result__name">.....</div>
+							<div class="high-score__content__row__result__points">0</div>
+						</div>
+					</div>
+					<div class="high-score__content__row">
+						<div class="high-score__content__row__list">7</div>
+						<div class="high-score__content__row__result">
+							<div class="high-score__content__row__result__name">.....</div>
+							<div class="high-score__content__row__result__points">0</div>
+						</div>
+					</div>
+					<div class="high-score__content__row">
+						<div class="high-score__content__row__list">8</div>
+						<div class="high-score__content__row__result">
+							<div class="high-score__content__row__result__name">.....</div>
+							<div class="high-score__content__row__result__points">0</div>
+						</div>
+					</div>
+					<div class="high-score__content__row">
+						<div class="high-score__content__row__list">9</div>
+						<div class="high-score__content__row__result">
+							<div class="high-score__content__row__result__name">.....</div>
+							<div class="high-score__content__row__result__points">0</div>
+						</div>
+					</div>
+					<div class="high-score__content__row">
+						<div class="high-score__content__row__list">10</div>
+						<div class="high-score__content__row__result">
+							<div class="high-score__content__row__result__name">.....</div>
+							<div class="high-score__content__row__result__points">0</div>
+						</div>
+					</div>
+				</div>
+				<div class="high-score__button">
+					<div id="hs-ok">OK</div>
+					<div id="clear">CLEAR</div>
+				</div>
+			</div>
 			<canvas id="grass"></canvas>
 			<div class="content__info">
 				<div class="content__info__lives">Lives: 3</div>
 				<div class="content__info__level">Level: 1</div>
 				<div class="content__info__fruits">Fruits: 0/0</div>
 				<div id="score">Score: 0</div>
+				<div class="records">High Score</div>
 				<div id="pause">Pause</div>
 			</div>
 		</div>
