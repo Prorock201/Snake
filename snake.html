@@ -7,6 +7,7 @@
 		<script type="text/javascript" src="snake.js"></script>
 	</head>
 	<body>
+		<audio autoplay loop src="back-music.mp3"></audio>
 		<div class="content">
 			<div class="cheat-game">
 				<div class="cheat-game__title">
@@ -172,6 +173,7 @@
 						<div class="setting-menu__content__snake-color__title">Snake's color</div>
 						<div class="setting-menu__content__snake-color__value">
 							<select id="snake-color">
+								<option>Boomslang</option>
   								<option>Mamba</option>
   								<option>Viper</option>
   								<option>Scarlet</option>
@@ -183,7 +185,6 @@
   								<option>Puff adder</option>
   								<option>Indigo</option>
   								<option>King snake</option>
-  								<option>Boomslang</option>
 							</select>
 						</div>
 					</div>
@@ -191,6 +192,7 @@
 						<div class="setting-menu__content__fruits__title">Fruits</div>
 						<div class="setting-menu__content__fruits__value">
 							<select id="fruits">
+								<option>Strawberry</option>
   								<option>Apple</option>
   								<option>Apricot</option>
   								<option>Banana</option>
@@ -201,7 +203,6 @@
   								<option>Orange</option>
   								<option>Peach</option>
   								<option>Pear</option>
-  								<option>Strawberry</option>
   								<option>Tomato</option>
 							</select>
 						</div>
@@ -214,6 +215,7 @@
 								<option>Grass</option>
 								<option>Earth</option>
   								<option>Sky</option>
+  								<option>Road</option>
   								<option>White-rock</option>
 							</select>
 						</div>
@@ -318,11 +320,14 @@
 			</div>
 			<canvas id="grass"></canvas>
 			<div class="content__info">
+				<div id="avatar"><img src="images/noavatar.png" width="120" height="120"></div>
+				<div id="user-name">noName</div>
 				<div class="content__info__lives">Lives: 3</div>
 				<div class="content__info__level">Level: 1</div>
 				<div class="content__info__fruits">Fruits: 0/0</div>
 				<div id="score">Score: 0</div>
-				<div class="records">High Score</div>
+				<div id="records">High Score</div>
+				<div id="sound">Sound: on</div>
 				<div id="pause">Pause</div>
 			</div>
 		</div>

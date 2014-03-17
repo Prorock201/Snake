@@ -20,25 +20,25 @@ var Score = 0;
 var Speed = 250;
 var Bonus = 300;
 var Pic = new Image();
-var FriutName = 'apple';
-var SkinA = 'green';
+var FriutName = 'strawberry';
+var SkinA = '#000066';
 var SkinB = 'white';
 var Theme = 'sand';
 Pic.src = 'images/' + FriutName + '.png';
 var CheatCode = [];
 var CheatMode = false;
-var UserName = 'noName';
+var UserName;
 var HighScore = [
-	{name: 'vasya', points: 10000},
-	{name: 'petro', points: 8000},
-	{name: 'mikhalich', points: 5000},
-	{name: 'ludochka', points: 2000},
-	{name: 'slot', points: 500},
-	{name: 'zahar', points: 3000},
-	{name: 'babka', points: 15000},
-	{name: 'superman', points: 20000},
-	{name: 'supergavno', points: 300},
-	{name: 'gavno', points: 100},
+	{name: 'vasya', points: 60000},
+	{name: 'DrAgOn', points: 50000},
+	{name: 'mikhalich', points: 3000},
+	{name: 'LUDOCHLA', points: 5000},
+	{name: 'killer888', points: 30000},
+	{name: 'Zahar', points: 8000},
+	{name: 'babka', points: 10000},
+	{name: 'PupS', points: 2000},
+	{name: 'karlson', points: 1000},
+	{name: 'Putin V.V.', points: 70000},
 ];
 
 function bindEventHandlers() {
@@ -46,25 +46,26 @@ function bindEventHandlers() {
 	window.exCtx = example.getContext('2d');
 	example.width = 200;
 	example.height = 460;
-	drawExample();
 
 	window.canvas = document.getElementById('grass');
 	window.context = canvas.getContext('2d');
 	canvas.width = 800;
 	canvas.height = 600;
 
+	//window buttons
+	//cheat window
 	$('#jump').click(function() {
 		CheatMode = true;
 		Level = $('#level-go option:selected').val();
 		$('.cheat-game').css('display', 'none');
 		getNecessarylevel(Level);
 	});
-
 	$('#cancelCheat').click(function() {
 		$('.cheat-game').css('display', 'none');
 		continueGame();
 	});
-
+	
+	//profile window
 	$('#confirm').click(function() {
 		if ($('.profile__text__value input').val().length < 3) {
 			$('#name-error').css('display', 'block');
@@ -72,41 +73,97 @@ function bindEventHandlers() {
 			UserName = $('.profile__text__value input').val();
 			$('.profile').css('display', 'none');
 			$('.new-game').css('display', 'block');
+			fillName();
 		}
 	});
-
 	$('#incognito').click(function() {
+		UserName = 'noName';
 		$('.profile').css('display', 'none');
 		$('.new-game').css('display', 'block');
+		fillName();
 	});
 
-	$('#start').on('click', startGame);
-	$('#settings').on('click', getSettingsMenu);
-	$('#next').on('click', getNewLevel);
-	$('#continue').on('click', getResume);
-	$('#resume').on('click', getResume);
-	$('#end-game').on('click', startNewGame);
-	$('#win-game').on('click', startNewGame);
-	$('#pause').on('click', getPause);
+	//new game window
+	$('#start').click(function() {
+		if (NeedFruits == 0) {
+		NeedFruits = 5;
+		}
+		$('#grass').css('background', 'url(images/'+ Theme + '.jpg)');
+		$('.new-game').css('display', 'none');
+		continueGame();
+	});
+	$('#settings').click(function() {
+		drawExample();
+		$('.setting-menu').css('display', 'block');
+	});
+
+	//level-up window
+	$('#next').click(function() {
+		Level += 1;
+		MaxFruits = Level;
+		Fruits = 0;
+		CurrentScore = 0;
+		Speed -= 25;
+		NeedFruits += 5;
+		$('.level-up').css('display', 'none');
+		continueGame();
+	});
 	$('.quit').on('click', startNewGame);
 
-	$('.records').click(function() {
-		$('.high-score').css('display', 'block');
-	});
+	//pause window
+	$('#continue').on('click', getResume);
 
+	//die window
+	$('#resume').on('click', getResume);
+
+	//end-game window
+	$('#end-game').on('click', startNewGame);
+	$('.records').on('click', showHighScore);
+
+	//win-game window
+	$('#win-game').on('click', startNewGame);
+
+	//settings window
 	$('#apply').click(function() {
 		$('.setting-menu').css('display', 'none');
 	});
 	$('#cancel').on('click', startNewGame);
 
+	//high score window
 	$('#hs-ok').click(function() {
+		if (Lives > 0) {
+			continueGame();
+		}
+		$('#records').css('background-color', '#000066');
 		$('.high-score').css('display', 'none');
 	});
-
 	$('#clear').click(function() {
 		console.log('FILL IT!!!');
 	});
 
+	//menu buttons
+	$('#records').on('click', showHighScore);
+	$('#sound').click(function() {
+		$('audio').each(function(index, element) {
+			if (element.paused == true) {
+				$('#sound').text('Sound: on');
+				$('#sound').css('background-color', '#000066');
+				element.play();
+			} else {
+				$('#sound').text('Sound: off');
+				$('#sound').css('background-color', '#FF0000');
+				element.pause();
+			}
+		});
+	});
+	$('#pause').click(function() {
+		clearInterval(play);
+		$('#pause').css('background-color', '#FF0000');
+		$('.pause__text__name-score').text('Your Current Score: ' + Score);
+		$('.pause').css('display', 'block');
+	});
+
+	//setting changes
 	$('#snake-size').change(function() {
 		Size = parseInt($('#snake-size option:selected').val());
 		Move = Size;
@@ -161,7 +218,7 @@ function bindEventHandlers() {
 				SkinB = 'red';
 				break;
 			case 'Boomslang':
-				SkinA = 'blue';
+				SkinA = '#000066';
 				SkinB = 'white';
 				break;
 		}
@@ -176,10 +233,11 @@ function bindEventHandlers() {
 	
 	$('#board-color').change(function() {
 		Theme = $('#board-color option:selected').val().toLowerCase();
-		$('#example').css('background', 'url('+ Theme + '.jpg)');
+		$('#example').css('background', 'url(images/' + Theme + '.jpg)');
 		drawExample();
 	});
 
+	//moving snake
 	$(document).keydown(function(event) {
 		switch(event.keyCode) {
 			case 37:
@@ -208,6 +266,7 @@ function bindEventHandlers() {
 				break;
 		}
 
+		//cheating
 		switch(event.keyCode) {
 			case 67:
 				if (CheatCode.length == 0) {
@@ -239,16 +298,6 @@ function bindEventHandlers() {
 				CheatCode = [];
 		}
 	});
-}
-
-function getSnakeBody() {
-	this.x = X;
-	this.y = Y;
-}
-
-function getFruits() {
-	this.x = getRandom(0, (canvas.width-Size)/Size)*Size;
-	this.y = getRandom(0, (canvas.height-Size)/Size)*Size;
 }
 
 function drawExample() {
@@ -350,33 +399,24 @@ function drawSnake() {
 	});
 }
 
-function getRandom(min,max) {
-	return Math.floor(Math.random()*(max+1-min)+min);
-}
-
 function getSweeties() {
 	if (Basket.length < MaxFruits) {
 		Basket.push(new getFruits());
 	}
 }
 
-function getPause() {
-	clearInterval(play);
-	$('.pause').css('display', 'block');
+function getSnakeBody() {
+	this.x = X;
+	this.y = Y;
 }
 
-function getResume() {
-	$('.pause').css('display', 'none');
-	$('.die').css('display', 'none');
-	continueGame();
+function getFruits() {
+	this.x = getRandom(0, (canvas.width-Size)/Size)*Size;
+	this.y = getRandom(0, (canvas.height-Size)/Size)*Size;
 }
 
-function startNewGame() {
-	location.reload();
-}
-
-function getSettingsMenu() {
-	$('.setting-menu').css('display', 'block');
+function getRandom(min,max) {
+	return Math.floor(Math.random()*(max+1-min)+min);
 }
 
 function upDateResult() {
@@ -399,7 +439,7 @@ function upDateResult() {
 		$('#score').text('Score: ' + Score);
 		$('.win-game').css('display', 'block');
 		recordResult();
-	} else if (Fruits == NeedFruits) {
+	} else if (Fruits >= NeedFruits) {
 		clearInterval(play);
 		levelBonus = Level*Bonus;
 		Score += levelBonus;
@@ -411,28 +451,6 @@ function upDateResult() {
 		PreviouslyScore = Score;
 		$('.level-up').css('display', 'block');
 	}
-}
-
-function startGame() {
-	if (NeedFruits == 0) {
-		NeedFruits = 5;
-	}
-	$('.setting-menu').css('display', 'none');
-	$('.new-game').css('display', 'none');
-	$('#grass').css('background', 'url('+ Theme + '.jpg)');
-	continueGame();
-}
-
-function getNewLevel() {
-	clearInterval(play);
-	Level += 1;
-	MaxFruits = Level;
-	Fruits = 0;
-	CurrentScore = 0;
-	Speed -= 25;
-	NeedFruits += 5;
-	$('.level-up').css('display', 'none');
-	continueGame();
 }
 
 function getNecessarylevel(Level) {
@@ -450,14 +468,67 @@ function continueGame() {
 	setInterval(getSweeties, 1000);
 }
 
+function fillName() {
+	$('#user-name').text(UserName);
+}
+
+function startNewGame() {
+	location.reload();
+}
+
+function getResume() {
+	if ($('#pause').css('background-color') == 'rgb(255, 0, 0)') {
+		$('#pause').css('background-color', '#000066');
+	}
+	$('.pause').css('display', 'none');
+	$('.die').css('display', 'none');
+	continueGame();
+}
+
+function showHighScore() {
+	clearInterval(play);
+	$('#records').css('background-color', '#FF0000');
+	$('.high-score').css('display', 'block');
+	if (localStorage.length == 0) {
+		HighScore.sort(function(a, b) {
+ 			return b.points - a.points
+		});
+	} else {
+		HighScore = JSON.parse(localStorage.getItem('result'));
+		HighScore.sort(function(a, b) {
+ 			return b.points - a.points
+		});
+	}
+	localStorage.setItem('result', JSON.stringify(HighScore));
+	$('.high-score__content__row__result').each(function(index, element) {
+		$(element).find('div').each(function(index2, element2) {
+			switch (index2) {
+				case 0:
+					$(element2).text(HighScore[index].name);
+					break;
+				case 1:
+					$(element2).text(HighScore[index].points);
+					break;
+			}
+		});
+	});
+}
+
 function recordResult() {
 	$('.high-score').css('display', 'block');
-	/*localStorage.setItem('records', {'name': UserName, 'points': Score});
-	HighScore.push(JSON.stringify(localStorage.getItem('records')));*/
-	HighScore.push({'name': UserName, 'points': Score});
-	HighScore.sort(function(a, b) {
- 		return b.points - a.points
-	});
+	if (localStorage.length == 0) {
+		HighScore.push({'name': UserName, 'points': Score});
+		HighScore.sort(function(a, b) {
+ 			return b.points - a.points
+		});
+	} else {
+		HighScore = JSON.parse(localStorage.getItem('result'));
+		HighScore.push({'name': UserName, 'points': Score});
+		HighScore.sort(function(a, b) {
+ 			return b.points - a.points
+		});
+	}
+	localStorage.setItem('result', JSON.stringify(HighScore));
 	$('.high-score__content__row__result').each(function(index, element) {
 		$(element).find('div').each(function(index2, element2) {
 			switch (index2) {

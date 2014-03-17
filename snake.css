@@ -1,7 +1,7 @@
 body {
  margin: 0;
  font-family: Comic Sans MS, monospace;
- background: url(back.jpg);
+ background: url(http://hdimg.ru/_ph/13/328597996.jpg);
  user-select: none;
  -webkit-user-select: none;
  cursor: default;
@@ -16,8 +16,8 @@ body {
 }
 
 #grass {
- background: url(sand.jpg);
- border: 2px solid #003D00;
+ background: url(images/sand.jpg);
+ border: 2px solid #000000;
  border-radius: 5px 5px 5px 5px;
  box-shadow: 5px 5px 10px #000000;
 }
@@ -25,8 +25,8 @@ body {
 .content__info {
  width: 200px;
  height: 600px;
- background: url(menu.jpg);
- border: 2px solid #666629;
+ background-color: #FFFFFF;
+ border: 2px solid #000000;
  border-radius: 10px 10px 10px 10px;
  box-shadow: 5px 5px 10px #000000;
  float: right;
@@ -34,28 +34,35 @@ body {
 
 .content__info div {
  width: 160px;
- height: 40px;
+ height: 30px;
  margin: 20px;
- padding-top: 8px;	
  font-size: 16pt;
  text-align: center;
- color: yellow;
+ color: #FFFFFF;
  text-shadow: 3px 3px 3px #000000;
- border: 1px solid #4C4C1F;
+ border: 1px solid #000000;
  border-radius: 10px 10px 10px 10px;
  box-shadow: 5px 5px 10px #000000;
- background: url(button-sand.jpg);
+ background-color: #000066;
+}
+
+#avatar {
+ width: 120px;
+ height: 120px;
+ margin-left: 40px;
+ border-radius: 0;
 }
 
 #score {
- border: 1px solid #52C2C3;
- background: url(score.jpg);
+ margin-bottom: 45px;
+ color: yellow;
+ cursor: pointer;
 }
 
-#pause {
- margin-top: 250px;
- border: 1px solid #B34864;
- background: url(pause.jpg);	
+#records:hover, #pause:hover, #sound:hover {
+ background-color: #FF0000;
+ transform: scale(1,5, 1,5);
+ -webkit-transform: scale(1.1, 1.1);
  cursor: pointer;
 }
 
@@ -228,7 +235,7 @@ body {
 
 #example {
  margin-top: 20px;
- background: url(sand.jpg);
+ background: url(images/sand.jpg);
  border: 2px solid #003D00;
  border-radius: 5px 5px 5px 5px;
  box-shadow: 5px 5px 10px #000000;
