@@ -7,6 +7,11 @@ body {
  cursor: default;
 }
 
+#imageCanvas {
+ background: url(images/noavatar.png);
+ border-radius: 10px 10px 10px 10px;
+}
+
 .content {
  width: 1100px;
  height: 600px;
@@ -17,7 +22,7 @@ body {
 
 #grass {
  background: url(images/sand.jpg);
- border: 2px solid #000000;
+ /*border: 2px solid #000000;*/
  border-radius: 5px 5px 5px 5px;
  box-shadow: 5px 5px 10px #000000;
 }
@@ -50,7 +55,6 @@ body {
  width: 120px;
  height: 120px;
  margin-left: 40px;
- border-radius: 0;
 }
 
 #score {
@@ -271,4 +275,18 @@ select {
 #hs-ok, #clear {
  margin: 30px;
  margin-left: 110px;
+}
+
+.profile__text__value div {
+ width: 145px;
+ float: left;
+}
+
+#imageLoader {
+ width: 110px;	
+}
+
+#nameLoader {
+ width: 104px;
+ margin-left: -2px;
 }

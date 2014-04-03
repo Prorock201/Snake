@@ -28,6 +28,7 @@ Pic.src = 'images/' + FriutName + '.png';
 var CheatCode = [];
 var CheatMode = false;
 var UserName;
+var Difficulty = 'Norm';
 var HighScore = [
 	{name: 'vasya', points: 60000},
 	{name: 'DrAgOn', points: 50000},
@@ -42,6 +43,24 @@ var HighScore = [
 ];
 
 function bindEventHandlers() {
+	$('#imageLoader').on('change', handleImage);
+	var avatar = document.getElementById('imageCanvas');
+	var avactx = avatar.getContext('2d');
+	avatar.width = 120;
+	avatar.height = 120;
+
+	function handleImage(e){
+	    var reader = new FileReader();
+	    reader.onload = function(event) {
+	        var img = new Image();
+	        img.onload = function() {
+	            avactx.drawImage(img, 0, 0, 120, 120);
+	        }
+	        img.src = event.target.result;
+	    }
+	    reader.readAsDataURL(e.target.files[0]);     
+	}
+
 	window.example = document.getElementById('example');
 	window.exCtx = example.getContext('2d');
 	example.width = 200;
@@ -237,6 +256,10 @@ function bindEventHandlers() {
 		drawExample();
 	});
 
+	$('#difficulty').change(function() {
+		Difficulty = $('#difficulty option:selected').val();
+	});
+
 	//moving snake
 	$(document).keydown(function(event) {
 		switch(event.keyCode) {
@@ -329,28 +352,21 @@ function drawExample() {
 function drawSnake() {
 	upDateResult();	
 	context.clearRect(0, 0, canvas.width, canvas.height);
+	drawBorder();
 	X += MoveX;
 	Y += MoveY;
 	Snake.pop();
 	Snake.unshift(new getSnakeBody());
 	for (var i = 1; i < Snake.length; i++) {
 		if (Snake[0].x == Snake[i].x && Snake[0].y == Snake[i].y) {
-			clearInterval(play);
-			Lives -= 1;
-			if (Lives < 0) {
-				$('.end-game__text__name-score').text('Your Total Score: ' + Score);
-				$('.end-game').css('display', 'block');
-				recordResult();
-			} else {
-				$('.die__text__name-score').text('Your Current Score: ' + Score);
-				$('.die__text__name').text('You have ' + Lives +' lives left');
-				$('.die').css('display', 'block');
-			}
+			lossinglife();
 		}
 	}
 
 	$.each(Snake, function drawBody(index, element) {
 		context.beginPath();
+		context.strokeStyle = '#000000';
+		context.lineWidth = 1;
 		context.fillStyle = SkinA;
 		context.arc(element.x + Size/2, element.y + Size/2, Size/2, 0, 2*Math.PI);
 		context.fill();
@@ -366,23 +382,58 @@ function drawSnake() {
 		context.fill();
 		context.stroke();
 
-		if (element.x < 0) {
-			element.x = element.x + canvas.width;
-			X = element.x;
-			drawBody(index, element);
-		} else if (element.x > canvas.width - Size) {
-			element.x = element.x - canvas.width;
-			X = element.x;
-			drawBody(index, element);
-		}	
-		if (element.y < 0) {
-			element.y = element.y + canvas.height;
-			Y = element.y;
-			drawBody(index, element);
-		} else if (element.y > canvas.height - Size) {
-			element.y = element.y - canvas.height;
-			Y = element.y;
-			drawBody(index, element);
+		if (Difficulty == 'Impossible') {
+			if (element.x < 0 || element.x > canvas.width - Size || element.y < 0 || element.y > canvas.height - Size) {
+				lossinglife();
+			}
+		} else if (Difficulty == 'Hard') {
+			if (element.x < 0 && (element.y < 200 || element.y >= 400)) {
+				lossinglife();
+			} else if (element.x > canvas.width - Size && (element.y < 200 || element.y >= 400)) {
+				lossinglife();
+			} else if (element.y < 0 && (element.x < 240 || element.x >= 560)) {
+				lossinglife();
+			} else if (element.y > canvas.height - Size && (element.x < 240 || element.x >= 560)) {
+				lossinglife();
+			} else {
+				if (element.x < 0) {
+					element.x = element.x + canvas.width;
+					X = element.x;
+					drawBody(index, element);
+				} else if (element.x > canvas.width - Size) {
+					element.x = element.x - canvas.width;
+					X = element.x;
+					drawBody(index, element);
+				}	
+				if (element.y < 0) {
+					element.y = element.y + canvas.height;
+					Y = element.y;
+					drawBody(index, element);
+				} else if (element.y > canvas.height - Size) {
+					element.y = element.y - canvas.height;
+					Y = element.y;
+					drawBody(index, element);
+				}
+			}
+		} else {
+			if (element.x < 0) {
+				element.x = element.x + canvas.width;
+				X = element.x;
+				drawBody(index, element);
+			} else if (element.x > canvas.width - Size) {
+				element.x = element.x - canvas.width;
+				X = element.x;
+				drawBody(index, element);
+			}	
+			if (element.y < 0) {
+				element.y = element.y + canvas.height;
+				Y = element.y;
+				drawBody(index, element);
+			} else if (element.y > canvas.height - Size) {
+				element.y = element.y - canvas.height;
+				Y = element.y;
+				drawBody(index, element);
+			}
 		}
 		
 		$.each(Basket, function (index2, element2) {
@@ -397,6 +448,54 @@ function drawSnake() {
 			}
 		});
 	});
+}
+
+function drawBorder() {
+	if (Difficulty == 'Hard') {
+		context.beginPath();
+		context.strokeStyle = '#000066';
+		context.lineWidth = 5;
+		context.moveTo(0, 200);
+		context.lineTo(0, 0);
+		context.lineTo(240, 0);
+		context.moveTo(560, 0);
+		context.lineTo(800, 0);
+		context.lineTo(800, 200);
+		context.moveTo(800, 400);
+		context.lineTo(800, 600);
+		context.lineTo(560, 600);
+		context.moveTo(240, 600);
+		context.lineTo(0, 600);
+		context.lineTo(0, 400);	
+		context.stroke();
+	} else if (Difficulty == 'Impossible') {
+		context.beginPath();
+		context.strokeStyle = '#000066';
+		context.lineWidth = 5;
+		context.moveTo(0, 0);
+		context.lineTo(canvas.width, 0);
+		context.lineTo(canvas.width, canvas.height);
+		context.lineTo(0, canvas.height);
+		context.lineTo(0, 0);	
+		context.stroke();
+	}
+}
+
+function lossinglife() {
+	clearInterval(play);
+	Snake.shift();
+	X = 600;
+	Y = 400;
+	Lives -= 1;
+	if (Lives < 0) {
+		$('.end-game__text__name-score').text('Your Total Score: ' + Score);
+		$('.end-game').css('display', 'block');
+		recordResult();
+	} else {
+		$('.die__text__name-score').text('Your Current Score: ' + Score);
+		$('.die__text__name').text('You have ' + Lives +' lives left');
+		$('.die').css('display', 'block');
+	}	
 }
 
 function getSweeties() {

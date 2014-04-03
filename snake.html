@@ -8,6 +8,15 @@
 	</head>
 	<body>
 		<audio autoplay loop src="back-music.mp3"></audio>
+		<!-- <div id="fb-root"></div>
+		<script>(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+		</script> -->
 		<div class="content">
 			<div class="cheat-game">
 				<div class="cheat-game__title">
@@ -40,9 +49,16 @@
 					<div class="profile__title__name">PROFILE</div>
 				</div>
 				<div class="profile__text">
-					<div class="profile__text__title">Enter your name:</div>
+					<div class="profile__text__title">Create your profile:</div>
 					<div class="profile__text__value">
-						<input type="text"></input>
+						<div class="profile__text__value__user-name">Name:</div>
+						<div>
+							<input type="text" id="nameLoader"></input>
+						</div>
+						<div class="profile__text__value__avatar">Avatar:</div>
+						<div>
+							<input type="file" id="imageLoader"></input>
+						</div>
 					</div>
 					<div id="name-error">*at least 3 symbols are necessary</div>
 				</div>
@@ -320,7 +336,7 @@
 			</div>
 			<canvas id="grass"></canvas>
 			<div class="content__info">
-				<div id="avatar"><img src="images/noavatar.png" width="120" height="120"></div>
+				<div id="avatar"><canvas id="imageCanvas"></canvas></div>
 				<div id="user-name">noName</div>
 				<div class="content__info__lives">Lives: 3</div>
 				<div class="content__info__level">Level: 1</div>
@@ -329,7 +345,9 @@
 				<div id="records">High Score</div>
 				<div id="sound">Sound: on</div>
 				<div id="pause">Pause</div>
+				<!-- <div class="fb-like" data-href="http://snake.ru/" data-width="200" data-layout="standard" data-action="like" data-show-faces="true" data-share="false"></div> -->
 			</div>
 		</div>
+
 	</body>
 </html>
